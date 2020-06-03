@@ -4,6 +4,7 @@ from room import Room
 
 room = {
     'outside':  Room("Outside Cave Entrance",
+
                      "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
