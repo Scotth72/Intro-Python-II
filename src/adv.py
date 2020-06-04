@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from items import Item
 
 # Declare all the rooms
 
@@ -32,15 +34,55 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
-
-#
+# add room
+room['outside'].items.append("dagger")
+# add items
+item = {
+    "dagger": Item("dagger", "small bladed knife")
+}
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
 
+player = Player("ReadyPlayer1", room["outside"], [])
 # Write a loop that:
 #
+choice = None
+moved = True
+print(f"Your Adventure Awaits!")
+while choice not in ["q"]:
+    print(f"Current room has {player.room.items}")
+    print(f"{player.inventory()} is in your inventory")
+    print(f"You are in {player.room.name}")
+    choice = input("choose n,s,e,w to MOVE, grab to GRAB, OR q to quit")
+    choice_arr = choice.split(" ")
+    choice_len = len(choice_arr)
+    print(choice_len)
+    if moved:
+        if choice in ["n"] and hasattr(player.room, 'n_to'):
+            player.room = player.room.n_to
+        elif choice in ["s"] and hasattr(player.room, 's_to'):
+            player.room = player.room.s_to
+        elif choice in ["e"] and hasattr(player.room, 'e_to'):
+            player.room = player.room._to
+        elif choice in ["w"] and hasattr(player.room, 'w_to'):
+            player.room = player.room.w_to
+        elif choice in ["q"]:
+            print(f"Comeback and play again")
+            moved = False
+        else:
+            print("Try again, unable to move that way")
+
+    if choice_len == 2:
+        action = choice_arr[0]
+        item = choice_arr[1]
+        if action in ["grab"]:
+            try:
+                player.pick_up_item(item[item])
+            except:
+                print("No item to grab")
+
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
