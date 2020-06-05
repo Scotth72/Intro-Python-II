@@ -19,3 +19,7 @@ class Player:
     def pick_up_item(self, item):
         self.items.append(item)
         print(self.items)
+
+    def drop_item(self, item):
+        self.items = list(
+            filter(lambda x: x.name is not item.name, self.items))

@@ -37,7 +37,7 @@ room['treasure'].s_to = room['narrow']
 # add room
 room['outside'].items.append("dagger")
 # add items
-item = {
+items = {
     "dagger": Item("dagger", "small bladed knife")
 }
 # Main
@@ -65,7 +65,7 @@ while choice not in ["q"]:
         elif choice in ["s"] and hasattr(player.room, 's_to'):
             player.room = player.room.s_to
         elif choice in ["e"] and hasattr(player.room, 'e_to'):
-            player.room = player.room._to
+            player.room = player.room.e_to
         elif choice in ["w"] and hasattr(player.room, 'w_to'):
             player.room = player.room.w_to
         elif choice in ["q"]:
@@ -79,7 +79,7 @@ while choice not in ["q"]:
         item = choice_arr[1]
         if action in ["grab"]:
             try:
-                player.pick_up_item(item[item])
+                player.pick_up_item(items[item])
             except:
                 print("No item to grab")
 
