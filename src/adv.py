@@ -55,7 +55,7 @@ while choice not in ["q"]:
     print(f"Current room has {player.room.items}")
     print(f"{player.inventory()} is in your inventory")
     print(f"You are in {player.room.name}")
-    choice = input("choose n,s,e,w to MOVE, grab to GRAB, OR q to quit")
+    choice = input("choose n,s,e,w to MOVE, grab to GRAB, drop tp DROP, OR q to quit")
     choice_arr = choice.split(" ")
     choice_len = len(choice_arr)
     print(choice_len)
@@ -82,6 +82,11 @@ while choice not in ["q"]:
                 player.pick_up_item(items[item])
             except:
                 print("No item to grab")
+        if action in ["drop"]:
+            try:
+                player.drop_item(items[item])
+            except:
+                print("No item to drop")            
 
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
